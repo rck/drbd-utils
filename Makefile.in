@@ -211,6 +211,10 @@ check_changelogs_up2date:
 	then \
 	   echo -e "\n\tconfigure.ac needs update"; \
 	   up2date=false; fi ; \
+	if ! grep "ENV DRBD_UTILS_VERSION $$dver_re" >/dev/null 2>&1 Dockerfile; \
+	then \
+	   echo -e "\n\tDockerfile needs update"; \
+	   up2date=false; fi ; \
 	if ! grep "^drbd-utils ($$dver_re" >/dev/null 2>&1 debian/changelog; \
 	then \
 	   echo -e "\n\tdebian/changelog needs update [ignored]\n"; \
