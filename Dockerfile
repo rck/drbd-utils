@@ -1,5 +1,5 @@
-FROM centos:centos7 as builder
-# FROM registry.access.redhat.com/rhel7 as builder
+FROM registry.access.redhat.com/rhel7 as builder
+# FROM centos:centos7 as builder
 
 ENV DL_URL https://www.linbit.com/downloads/drbd/utils
 # setup env, unfortunately ENV is too inflexible
@@ -33,8 +33,8 @@ RUN cd ${HOME} && . "$NV" && \
   ./configure --with-prebuiltman && make drbd.spec && \
   rpmbuild -bb --without drbdmon --with prebuiltman --without sbinsymlinks --without manual --without heartbeat --without xen --without 83support --without 84support drbd.spec
 
-FROM centos:centos7
-# FROM registry.access.redhat.com/rhel7
+FROM registry.access.redhat.com/rhel7
+# FROM centos:centos7
 
 MAINTAINER Roland Kammerer <roland.kammerer@linbit.com>
 
